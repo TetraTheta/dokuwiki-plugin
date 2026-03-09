@@ -1,0 +1,6 @@
+base   logindelay
+author TetraTheta
+date   2026-03-08
+name   LoginDelay
+desc   Delay login after failed attempts
+url    

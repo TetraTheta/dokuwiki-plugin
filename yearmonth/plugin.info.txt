@@ -1,0 +1,6 @@
+base   yearmonth
+author TetraTheta
+date   2026-03-07
+name   yearmonth
+desc   Calculate year and month passage from given date
+url    

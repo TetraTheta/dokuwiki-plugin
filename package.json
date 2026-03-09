@@ -1,0 +1,20 @@
+{
+  "name": "dokuwiki-plugin",
+  "private": true,
+  "type": "module",
+  "prettier": {
+    "braceStyle": "1tbs",
+    "plugins": [
+      "@prettier/plugin-php"
+    ],
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
+    "prettier": "^3.8.1"
+  }
+}

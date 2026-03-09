@@ -1,0 +1,6 @@
+base   betterinfobox
+author TetraTheta
+date   2026-03-07
+name   Better Infobox
+desc   Infobox plugin with typed rows and full DokuWiki syntax support in keys and values
+url    
