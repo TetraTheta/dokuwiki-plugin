@@ -21,7 +21,7 @@ class action_plugin_logindelay_login extends DokuWiki_Action_Plugin {
       return;
     }
 
-    $authenticatedUser = $_SERVER['REMOTE_USER'];
+    $authenticatedUser = $_SERVER['REMOTE_USER'] ?? null;
     $loginUser = $event->data['user'];
     $logHelper = new helper_plugin_logindelay_log($loginUser);
     $delay = $logHelper->calculateDelay();
