@@ -37,6 +37,15 @@ class helper_plugin_logindelay_log extends DokuWiki_Plugin {
   }
 
   public function readStrikes() {
-    return (int) file_get_contents($this->statFile);
+    if (!is_file($this->statFile)) {
+      return 0;
+    }
+
+    $content = file_get_contents($this->statFile);
+    if (false === $content) {
+      return 0;
+    }
+
+    return (int) $content;
   }
 }
