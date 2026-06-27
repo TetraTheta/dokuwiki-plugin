@@ -116,7 +116,7 @@ class syntax_plugin_betterinfobox extends DokuWiki_Syntax_Plugin {
 
   /**
    * Parse the raw content between <infobox> and </infobox>.
-   * Each non-empty line is parsed as: type [| key] [ = value]
+   * Each non-empty line is parsed as: type [| key] [= value]
    * Line starts with '#' will be ignored.
    */
   private function _parseLines($raw) {
@@ -134,29 +134,31 @@ class syntax_plugin_betterinfobox extends DokuWiki_Syntax_Plugin {
       $key = '';
       $value = '';
 
-      // Split on first "|" to separate type from the rest
-      $pipePos = strpos($line, '|');
+      // Split on the first unescaped "|" to separate type from the rest.
+      $pipePos = $this->_findSeparator($line, '|');
 
       if (false !== $pipePos) {
         $type = strtolower(trim(substr($line, 0, $pipePos)));
         $rest = substr($line, $pipePos + 1);
 
-        // Split the rest on first " = " to separate key from value
-        $eqPos = strpos($rest, ' = ');
+        // Split the rest on the first unescaped "=" to separate key from value.
+        $eqPos = $this->_findSeparator($rest, '=');
 
         if (false !== $eqPos) {
           $key = trim(substr($rest, 0, $eqPos));
-          $value = trim(substr($rest, $eqPos + 3));
+          $value = trim(substr($rest, $eqPos + 1));
+        } elseif ('text' === $type) {
+          $value = trim($rest);
         } else {
           $key = trim($rest);
         }
       } else {
         // No pipe: could be "type = value" or just "type"
-        $eqPos = strpos($line, ' = ');
+        $eqPos = $this->_findSeparator($line, '=');
 
         if (false !== $eqPos) {
           $type = strtolower(trim(substr($line, 0, $eqPos)));
-          $value = trim(substr($line, $eqPos + 3));
+          $value = trim(substr($line, $eqPos + 1));
         } else {
           $type = strtolower(trim($line));
         }
@@ -274,9 +276,11 @@ class syntax_plugin_betterinfobox extends DokuWiki_Syntax_Plugin {
 
         case 'text':
           $renderer->doc .= '<div class="bib-row">';
-          $renderer->doc .= '<div class="bib-key">';
-          $renderer->doc .= $this->_wiki($item['key'], $item['keySpoiler']);
-          $renderer->doc .= '</div>';
+          if ('' !== $item['key']) {
+            $renderer->doc .= '<div class="bib-key">';
+            $renderer->doc .= $this->_wiki($item['key'], $item['keySpoiler']);
+            $renderer->doc .= '</div>';
+          }
           $renderer->doc .= '<div class="bib-value">';
           $renderer->doc .= $this->_wiki($item['value'], $item['valueSpoiler']);
           $renderer->doc .= '</div>';
@@ -348,6 +352,31 @@ class syntax_plugin_betterinfobox extends DokuWiki_Syntax_Plugin {
     }
 
     $renderer->doc .= '</div>' . DOKU_LF;
+  }
+
+  /**
+   * Find the first separator that is not escaped with a backslash.
+   */
+  private function _findSeparator($text, $separator) {
+    $length = strlen($text);
+
+    for ($i = 0; $i < $length; ++$i) {
+      if ($separator !== $text[$i]) {
+        continue;
+      }
+
+      $slashCount = 0;
+
+      for ($j = $i - 1; $j >= 0 && '\\' === $text[$j]; --$j) {
+        ++$slashCount;
+      }
+
+      if (0 === $slashCount % 2) {
+        return $i;
+      }
+    }
+
+    return false;
   }
 
   /**

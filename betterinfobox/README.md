@@ -26,11 +26,12 @@ type | key text = value text
 Each line follows the pattern:
 
 ```
-<type>[| <key text>][ = <value text>]
+<type>[|<key text>][=<value text>]
 ```
 
 - **`|`** separates the type from the key/value portion.
-- **` = `** (space-equals-space) separates the key from the value.
+- **`=`** separates the key from the value. Spaces around separators are optional.
+- `text` without `=` is rendered as normal text, not as a bold key.
 - Both key text and value text support full DokuWiki syntax and plugin syntax.
 
 ## Types Reference
@@ -45,6 +46,7 @@ Each line follows the pattern:
 | `section`  | `section \| Section Name`                | Section header                         |
 | `collapse` | `collapse \| Section Name`               | Collapsible section header (closed)    |
 | `text`     | `text \| Label = Value`                  | Key-value row                          |
+|            | `text \| Normal text`                    | Normal text row                        |
 | `wide`     | `wide \| Full-width content`             | Full-width row spanning both columns   |
 | `divider`  | `divider` or `divider \| Text`           | Horizontal divider with optional text  |
 
@@ -55,6 +57,7 @@ Prefix key text or value text with `!` to make it a spoiler (hidden until hover/
 ```
 text | Codename = !Secret Identity
 text | !Hidden Label = !Hidden Value
+text|Inline=Spacing around separators is optional
 ```
 
 ## Tabbed Images
