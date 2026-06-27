@@ -1,0 +1,6 @@
+base   folded
+author TetraTheta
+date   2026-06-27
+name   folded plugin
+desc   Foldable page sections
+url
