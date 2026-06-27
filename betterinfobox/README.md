@@ -35,18 +35,18 @@ Each line follows the pattern:
 
 ## Types Reference
 
-| Type       | Usage                                    | Description                              |
-|------------|------------------------------------------|------------------------------------------|
-| `title`    | `title \| Title Text`                    | Infobox title row (centered, bold)       |
-| `banner`   | `banner \| namespace:image.jpg`          | Full-width banner image                  |
-| `image`    | `image \| namespace:image.jpg`           | Centered image with optional caption     |
-|            | `image \| namespace:image.jpg = Caption` |                                          |
-| `tab`      | `tab \| namespace:image.jpg = Label`     | Tabbed image (group consecutive lines)   |
-| `section`  | `section \| Section Name`                | Section header                           |
-| `collapse` | `collapse \| Section Name`               | Collapsible section header (closed)      |
-| `text`     | `text \| Label = Value`                  | Key-value row                            |
-| `wide`     | `wide \| Full-width content`             | Full-width row spanning both columns     |
-| `divider`  | `divider` or `divider \| Text`           | Horizontal divider with optional text    |
+| Type       | Usage                                    | Description                            |
+| ---------- | ---------------------------------------- | -------------------------------------- |
+| `title`    | `title \| Title Text`                    | Infobox title row (centered, bold)     |
+| `banner`   | `banner \| namespace:image.jpg`          | Full-width banner image                |
+| `image`    | `image \| namespace:image.jpg`           | Centered image with optional caption   |
+|            | `image \| namespace:image.jpg = Caption` |                                        |
+| `tab`      | `tab \| namespace:image.jpg = Label`     | Tabbed image (group consecutive lines) |
+| `section`  | `section \| Section Name`                | Section header                         |
+| `collapse` | `collapse \| Section Name`               | Collapsible section header (closed)    |
+| `text`     | `text \| Label = Value`                  | Key-value row                          |
+| `wide`     | `wide \| Full-width content`             | Full-width row spanning both columns   |
+| `divider`  | `divider` or `divider \| Text`           | Horizontal divider with optional text  |
 
 ## Spoiler
 
