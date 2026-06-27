@@ -1,0 +1,6 @@
+base   ruby
+author TetraTheta
+date   2026-06-27
+name   ruby
+desc   Insert ruby into document
+url
